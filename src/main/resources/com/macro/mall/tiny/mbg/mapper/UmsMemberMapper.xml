@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.tiny.mbg.mapper.UmsMemberMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.tiny.mbg.model.UmsMember">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_level_id" jdbcType="BIGINT" property="memberLevelId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="personalized_signature" jdbcType="VARCHAR" property="personalizedSignature" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="integration" jdbcType="INTEGER" property="integration" />
+    <result column="growth" jdbcType="INTEGER" property="growth" />
+    <result column="luckey_count" jdbcType="INTEGER" property="luckeyCount" />
+    <result column="history_integration" jdbcType="INTEGER" property="historyIntegration" />
+    <result column="organizationname" jdbcType="VARCHAR" property="organizationname" />
+    <result column="monthly_orders" jdbcType="VARCHAR" property="monthlyOrders" />
+    <result column="login_type" jdbcType="INTEGER" property="loginType" />
+    <result column="balance" jdbcType="DOUBLE" property="balance" />
+    <result column="shopify_name" jdbcType="VARCHAR" property="shopifyName" />
+    <result column="shopify_flag" jdbcType="INTEGER" property="shopifyFlag" />
+    <result column="guided_flag" jdbcType="INTEGER" property="guidedFlag" />
+    <result column="country_id" jdbcType="INTEGER" property="countryId" />
+    <result column="sourcing_type_of_shipping" jdbcType="INTEGER" property="sourcingTypeOfShipping" />
+    <result column="sourcing_choose_type" jdbcType="INTEGER" property="sourcingChooseType" />
+    <result column="sourcing_country_name" jdbcType="VARCHAR" property="sourcingCountryName" />
+    <result column="sourcing_country_id" jdbcType="INTEGER" property="sourcingCountryId" />
+    <result column="sourcing_state_name" jdbcType="VARCHAR" property="sourcingStateName" />
+    <result column="sourcing_custom_type" jdbcType="VARCHAR" property="sourcingCustomType" />
+    <result column="sourcing_order_quantity" jdbcType="INTEGER" property="sourcingOrderQuantity" />
+    <result column="sourcing_remark" jdbcType="VARCHAR" property="sourcingRemark" />
+    <result column="sourcing_prc_flag" jdbcType="INTEGER" property="sourcingPrcFlag" />
+    <result column="sourcing_price_ps" jdbcType="VARCHAR" property="sourcingPricePs" />
+    <result column="sourcing_cif_port" jdbcType="VARCHAR" property="sourcingCifPort" />
+    <result column="sourcing_fba_warehouse" jdbcType="VARCHAR" property="sourcingFbaWarehouse" />
+    <result column="logo_url" jdbcType="VARCHAR" property="logoUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, member_level_id, username, password, nickname, phone, status, create_time, icon, 
+    gender, birthday, city, job, personalized_signature, source_type, integration, growth, 
+    luckey_count, history_integration, organizationname, monthly_orders, login_type, 
+    balance, shopify_name, shopify_flag, guided_flag, country_id, sourcing_type_of_shipping, 
+    sourcing_choose_type, sourcing_country_name, sourcing_country_id, sourcing_state_name, 
+    sourcing_custom_type, sourcing_order_quantity, sourcing_remark, sourcing_prc_flag, 
+    sourcing_price_ps, sourcing_cif_port, sourcing_fba_warehouse, logo_url
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.tiny.mbg.model.UmsMemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ums_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ums_member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ums_member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.tiny.mbg.model.UmsMemberExample">
+    delete from ums_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.tiny.mbg.model.UmsMember">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ums_member (member_level_id, username, password, 
+      nickname, phone, status, 
+      create_time, icon, gender, 
+      birthday, city, job, personalized_signature, 
+      source_type, integration, growth, 
+      luckey_count, history_integration, organizationname, 
+      monthly_orders, login_type, balance, 
+      shopify_name, shopify_flag, guided_flag, 
+      country_id, sourcing_type_of_shipping, sourcing_choose_type, 
+      sourcing_country_name, sourcing_country_id, 
+      sourcing_state_name, sourcing_custom_type, 
+      sourcing_order_quantity, sourcing_remark, 
+      sourcing_prc_flag, sourcing_price_ps, sourcing_cif_port, 
+      sourcing_fba_warehouse, logo_url)
+    values (#{memberLevelId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{icon,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=DATE}, #{city,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{personalizedSignature,jdbcType=VARCHAR}, 
+      #{sourceType,jdbcType=INTEGER}, #{integration,jdbcType=INTEGER}, #{growth,jdbcType=INTEGER}, 
+      #{luckeyCount,jdbcType=INTEGER}, #{historyIntegration,jdbcType=INTEGER}, #{organizationname,jdbcType=VARCHAR}, 
+      #{monthlyOrders,jdbcType=VARCHAR}, #{loginType,jdbcType=INTEGER}, #{balance,jdbcType=DOUBLE}, 
+      #{shopifyName,jdbcType=VARCHAR}, #{shopifyFlag,jdbcType=INTEGER}, #{guidedFlag,jdbcType=INTEGER}, 
+      #{countryId,jdbcType=INTEGER}, #{sourcingTypeOfShipping,jdbcType=INTEGER}, #{sourcingChooseType,jdbcType=INTEGER}, 
+      #{sourcingCountryName,jdbcType=VARCHAR}, #{sourcingCountryId,jdbcType=INTEGER}, 
+      #{sourcingStateName,jdbcType=VARCHAR}, #{sourcingCustomType,jdbcType=VARCHAR}, 
+      #{sourcingOrderQuantity,jdbcType=INTEGER}, #{sourcingRemark,jdbcType=VARCHAR}, 
+      #{sourcingPrcFlag,jdbcType=INTEGER}, #{sourcingPricePs,jdbcType=VARCHAR}, #{sourcingCifPort,jdbcType=VARCHAR}, 
+      #{sourcingFbaWarehouse,jdbcType=VARCHAR}, #{logoUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.tiny.mbg.model.UmsMember">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ums_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberLevelId != null">
+        member_level_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="personalizedSignature != null">
+        personalized_signature,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="integration != null">
+        integration,
+      </if>
+      <if test="growth != null">
+        growth,
+      </if>
+      <if test="luckeyCount != null">
+        luckey_count,
+      </if>
+      <if test="historyIntegration != null">
+        history_integration,
+      </if>
+      <if test="organizationname != null">
+        organizationname,
+      </if>
+      <if test="monthlyOrders != null">
+        monthly_orders,
+      </if>
+      <if test="loginType != null">
+        login_type,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="shopifyName != null">
+        shopify_name,
+      </if>
+      <if test="shopifyFlag != null">
+        shopify_flag,
+      </if>
+      <if test="guidedFlag != null">
+        guided_flag,
+      </if>
+      <if test="countryId != null">
+        country_id,
+      </if>
+      <if test="sourcingTypeOfShipping != null">
+        sourcing_type_of_shipping,
+      </if>
+      <if test="sourcingChooseType != null">
+        sourcing_choose_type,
+      </if>
+      <if test="sourcingCountryName != null">
+        sourcing_country_name,
+      </if>
+      <if test="sourcingCountryId != null">
+        sourcing_country_id,
+      </if>
+      <if test="sourcingStateName != null">
+        sourcing_state_name,
+      </if>
+      <if test="sourcingCustomType != null">
+        sourcing_custom_type,
+      </if>
+      <if test="sourcingOrderQuantity != null">
+        sourcing_order_quantity,
+      </if>
+      <if test="sourcingRemark != null">
+        sourcing_remark,
+      </if>
+      <if test="sourcingPrcFlag != null">
+        sourcing_prc_flag,
+      </if>
+      <if test="sourcingPricePs != null">
+        sourcing_price_ps,
+      </if>
+      <if test="sourcingCifPort != null">
+        sourcing_cif_port,
+      </if>
+      <if test="sourcingFbaWarehouse != null">
+        sourcing_fba_warehouse,
+      </if>
+      <if test="logoUrl != null">
+        logo_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberLevelId != null">
+        #{memberLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="personalizedSignature != null">
+        #{personalizedSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="integration != null">
+        #{integration,jdbcType=INTEGER},
+      </if>
+      <if test="growth != null">
+        #{growth,jdbcType=INTEGER},
+      </if>
+      <if test="luckeyCount != null">
+        #{luckeyCount,jdbcType=INTEGER},
+      </if>
+      <if test="historyIntegration != null">
+        #{historyIntegration,jdbcType=INTEGER},
+      </if>
+      <if test="organizationname != null">
+        #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyOrders != null">
+        #{monthlyOrders,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        #{loginType,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="shopifyName != null">
+        #{shopifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopifyFlag != null">
+        #{shopifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="guidedFlag != null">
+        #{guidedFlag,jdbcType=INTEGER},
+      </if>
+      <if test="countryId != null">
+        #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingTypeOfShipping != null">
+        #{sourcingTypeOfShipping,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingChooseType != null">
+        #{sourcingChooseType,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingCountryName != null">
+        #{sourcingCountryName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingCountryId != null">
+        #{sourcingCountryId,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingStateName != null">
+        #{sourcingStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingCustomType != null">
+        #{sourcingCustomType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingOrderQuantity != null">
+        #{sourcingOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingRemark != null">
+        #{sourcingRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingPrcFlag != null">
+        #{sourcingPrcFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingPricePs != null">
+        #{sourcingPricePs,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingCifPort != null">
+        #{sourcingCifPort,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingFbaWarehouse != null">
+        #{sourcingFbaWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.tiny.mbg.model.UmsMemberExample" resultType="java.lang.Integer">
+    select count(*) from ums_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ums_member
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberLevelId != null">
+        member_level_id = #{record.memberLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null">
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalizedSignature != null">
+        personalized_signature = #{record.personalizedSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourceType != null">
+        source_type = #{record.sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.integration != null">
+        integration = #{record.integration,jdbcType=INTEGER},
+      </if>
+      <if test="record.growth != null">
+        growth = #{record.growth,jdbcType=INTEGER},
+      </if>
+      <if test="record.luckeyCount != null">
+        luckey_count = #{record.luckeyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.historyIntegration != null">
+        history_integration = #{record.historyIntegration,jdbcType=INTEGER},
+      </if>
+      <if test="record.organizationname != null">
+        organizationname = #{record.organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthlyOrders != null">
+        monthly_orders = #{record.monthlyOrders,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginType != null">
+        login_type = #{record.loginType,jdbcType=INTEGER},
+      </if>
+      <if test="record.balance != null">
+        balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shopifyName != null">
+        shopify_name = #{record.shopifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopifyFlag != null">
+        shopify_flag = #{record.shopifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.guidedFlag != null">
+        guided_flag = #{record.guidedFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.countryId != null">
+        country_id = #{record.countryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcingTypeOfShipping != null">
+        sourcing_type_of_shipping = #{record.sourcingTypeOfShipping,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcingChooseType != null">
+        sourcing_choose_type = #{record.sourcingChooseType,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcingCountryName != null">
+        sourcing_country_name = #{record.sourcingCountryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcingCountryId != null">
+        sourcing_country_id = #{record.sourcingCountryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcingStateName != null">
+        sourcing_state_name = #{record.sourcingStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcingCustomType != null">
+        sourcing_custom_type = #{record.sourcingCustomType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcingOrderQuantity != null">
+        sourcing_order_quantity = #{record.sourcingOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcingRemark != null">
+        sourcing_remark = #{record.sourcingRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcingPrcFlag != null">
+        sourcing_prc_flag = #{record.sourcingPrcFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourcingPricePs != null">
+        sourcing_price_ps = #{record.sourcingPricePs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcingCifPort != null">
+        sourcing_cif_port = #{record.sourcingCifPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcingFbaWarehouse != null">
+        sourcing_fba_warehouse = #{record.sourcingFbaWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logoUrl != null">
+        logo_url = #{record.logoUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ums_member
+    set id = #{record.id,jdbcType=BIGINT},
+      member_level_id = #{record.memberLevelId,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=INTEGER},
+      birthday = #{record.birthday,jdbcType=DATE},
+      city = #{record.city,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      personalized_signature = #{record.personalizedSignature,jdbcType=VARCHAR},
+      source_type = #{record.sourceType,jdbcType=INTEGER},
+      integration = #{record.integration,jdbcType=INTEGER},
+      growth = #{record.growth,jdbcType=INTEGER},
+      luckey_count = #{record.luckeyCount,jdbcType=INTEGER},
+      history_integration = #{record.historyIntegration,jdbcType=INTEGER},
+      organizationname = #{record.organizationname,jdbcType=VARCHAR},
+      monthly_orders = #{record.monthlyOrders,jdbcType=VARCHAR},
+      login_type = #{record.loginType,jdbcType=INTEGER},
+      balance = #{record.balance,jdbcType=DOUBLE},
+      shopify_name = #{record.shopifyName,jdbcType=VARCHAR},
+      shopify_flag = #{record.shopifyFlag,jdbcType=INTEGER},
+      guided_flag = #{record.guidedFlag,jdbcType=INTEGER},
+      country_id = #{record.countryId,jdbcType=INTEGER},
+      sourcing_type_of_shipping = #{record.sourcingTypeOfShipping,jdbcType=INTEGER},
+      sourcing_choose_type = #{record.sourcingChooseType,jdbcType=INTEGER},
+      sourcing_country_name = #{record.sourcingCountryName,jdbcType=VARCHAR},
+      sourcing_country_id = #{record.sourcingCountryId,jdbcType=INTEGER},
+      sourcing_state_name = #{record.sourcingStateName,jdbcType=VARCHAR},
+      sourcing_custom_type = #{record.sourcingCustomType,jdbcType=VARCHAR},
+      sourcing_order_quantity = #{record.sourcingOrderQuantity,jdbcType=INTEGER},
+      sourcing_remark = #{record.sourcingRemark,jdbcType=VARCHAR},
+      sourcing_prc_flag = #{record.sourcingPrcFlag,jdbcType=INTEGER},
+      sourcing_price_ps = #{record.sourcingPricePs,jdbcType=VARCHAR},
+      sourcing_cif_port = #{record.sourcingCifPort,jdbcType=VARCHAR},
+      sourcing_fba_warehouse = #{record.sourcingFbaWarehouse,jdbcType=VARCHAR},
+      logo_url = #{record.logoUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.tiny.mbg.model.UmsMember">
+    update ums_member
+    <set>
+      <if test="memberLevelId != null">
+        member_level_id = #{memberLevelId,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="personalizedSignature != null">
+        personalized_signature = #{personalizedSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="integration != null">
+        integration = #{integration,jdbcType=INTEGER},
+      </if>
+      <if test="growth != null">
+        growth = #{growth,jdbcType=INTEGER},
+      </if>
+      <if test="luckeyCount != null">
+        luckey_count = #{luckeyCount,jdbcType=INTEGER},
+      </if>
+      <if test="historyIntegration != null">
+        history_integration = #{historyIntegration,jdbcType=INTEGER},
+      </if>
+      <if test="organizationname != null">
+        organizationname = #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlyOrders != null">
+        monthly_orders = #{monthlyOrders,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        login_type = #{loginType,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="shopifyName != null">
+        shopify_name = #{shopifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopifyFlag != null">
+        shopify_flag = #{shopifyFlag,jdbcType=INTEGER},
+      </if>
+      <if test="guidedFlag != null">
+        guided_flag = #{guidedFlag,jdbcType=INTEGER},
+      </if>
+      <if test="countryId != null">
+        country_id = #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingTypeOfShipping != null">
+        sourcing_type_of_shipping = #{sourcingTypeOfShipping,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingChooseType != null">
+        sourcing_choose_type = #{sourcingChooseType,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingCountryName != null">
+        sourcing_country_name = #{sourcingCountryName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingCountryId != null">
+        sourcing_country_id = #{sourcingCountryId,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingStateName != null">
+        sourcing_state_name = #{sourcingStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingCustomType != null">
+        sourcing_custom_type = #{sourcingCustomType,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingOrderQuantity != null">
+        sourcing_order_quantity = #{sourcingOrderQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingRemark != null">
+        sourcing_remark = #{sourcingRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingPrcFlag != null">
+        sourcing_prc_flag = #{sourcingPrcFlag,jdbcType=INTEGER},
+      </if>
+      <if test="sourcingPricePs != null">
+        sourcing_price_ps = #{sourcingPricePs,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingCifPort != null">
+        sourcing_cif_port = #{sourcingCifPort,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcingFbaWarehouse != null">
+        sourcing_fba_warehouse = #{sourcingFbaWarehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="logoUrl != null">
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.tiny.mbg.model.UmsMember">
+    update ums_member
+    set member_level_id = #{memberLevelId,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      icon = #{icon,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      city = #{city,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      personalized_signature = #{personalizedSignature,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=INTEGER},
+      integration = #{integration,jdbcType=INTEGER},
+      growth = #{growth,jdbcType=INTEGER},
+      luckey_count = #{luckeyCount,jdbcType=INTEGER},
+      history_integration = #{historyIntegration,jdbcType=INTEGER},
+      organizationname = #{organizationname,jdbcType=VARCHAR},
+      monthly_orders = #{monthlyOrders,jdbcType=VARCHAR},
+      login_type = #{loginType,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=DOUBLE},
+      shopify_name = #{shopifyName,jdbcType=VARCHAR},
+      shopify_flag = #{shopifyFlag,jdbcType=INTEGER},
+      guided_flag = #{guidedFlag,jdbcType=INTEGER},
+      country_id = #{countryId,jdbcType=INTEGER},
+      sourcing_type_of_shipping = #{sourcingTypeOfShipping,jdbcType=INTEGER},
+      sourcing_choose_type = #{sourcingChooseType,jdbcType=INTEGER},
+      sourcing_country_name = #{sourcingCountryName,jdbcType=VARCHAR},
+      sourcing_country_id = #{sourcingCountryId,jdbcType=INTEGER},
+      sourcing_state_name = #{sourcingStateName,jdbcType=VARCHAR},
+      sourcing_custom_type = #{sourcingCustomType,jdbcType=VARCHAR},
+      sourcing_order_quantity = #{sourcingOrderQuantity,jdbcType=INTEGER},
+      sourcing_remark = #{sourcingRemark,jdbcType=VARCHAR},
+      sourcing_prc_flag = #{sourcingPrcFlag,jdbcType=INTEGER},
+      sourcing_price_ps = #{sourcingPricePs,jdbcType=VARCHAR},
+      sourcing_cif_port = #{sourcingCifPort,jdbcType=VARCHAR},
+      sourcing_fba_warehouse = #{sourcingFbaWarehouse,jdbcType=VARCHAR},
+      logo_url = #{logoUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
